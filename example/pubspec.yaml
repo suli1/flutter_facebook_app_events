@@ -2,6 +2,8 @@ name: facebook_app_events_example
 description: Demonstrates how to use the facebook_app_events plugin.
 publish_to: 'none'
 
+version: 1.0.0
+
 environment:
   sdk: ">=2.1.0 <3.0.0"
 

@@ -1,28 +1,26 @@
 package id.oddbit.flutter.facebook_app_events
 
-import androidx.annotation.NonNull
-
 import android.os.Bundle
 import android.util.Log
+import androidx.annotation.NonNull
 import com.facebook.FacebookSdk
-import com.facebook.appevents.AppEventsLogger
 import com.facebook.GraphRequest
 import com.facebook.GraphResponse
+import com.facebook.appevents.AppEventsLogger
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
-import io.flutter.plugin.common.PluginRegistry.Registrar
 import java.util.Currency
 
 /** FacebookAppEventsPlugin */
-class FacebookAppEventsPlugin: FlutterPlugin, MethodCallHandler {
+class FacebookAppEventsPlugin : FlutterPlugin, MethodCallHandler {
   /// The MethodChannel that will the communication between Flutter and native Android
   ///
   /// This local reference serves to register the plugin with the Flutter Engine and unregister it
   /// when the Flutter Engine is detached from the Activity
-  private lateinit var channel : MethodChannel
+  private lateinit var channel: MethodChannel
   private lateinit var appEventsLogger: AppEventsLogger
   private lateinit var anonymousId: String
 
@@ -76,11 +74,13 @@ class FacebookAppEventsPlugin: FlutterPlugin, MethodCallHandler {
   }
 
   private fun handleGetApplicationId(call: MethodCall, result: Result) {
-    result.success(appEventsLogger.getApplicationId())
+    result.success(appEventsLogger.applicationId)
   }
- private fun handleGetAnonymousId(call: MethodCall, result: Result) {
+
+  private fun handleGetAnonymousId(call: MethodCall, result: Result) {
     result.success(anonymousId)
   }
+
   //not an android implementation as of yet
   private fun handleSetAdvertiserTracking(call: MethodCall, result: Result) {
     result.success(null);
@@ -125,16 +125,16 @@ class FacebookAppEventsPlugin: FlutterPlugin, MethodCallHandler {
     val parameterBundle = createBundleFromMap(parameters)
 
     AppEventsLogger.setUserData(
-      parameterBundle?.getString("email"),
-      parameterBundle?.getString("firstName"),
-      parameterBundle?.getString("lastName"),
-      parameterBundle?.getString("phone"),
-      parameterBundle?.getString("dateOfBirth"),
-      parameterBundle?.getString("gender"),
-      parameterBundle?.getString("city"),
-      parameterBundle?.getString("state"),
-      parameterBundle?.getString("zip"),
-      parameterBundle?.getString("country")
+        parameterBundle?.getString("email"),
+        parameterBundle?.getString("firstName"),
+        parameterBundle?.getString("lastName"),
+        parameterBundle?.getString("phone"),
+        parameterBundle?.getString("dateOfBirth"),
+        parameterBundle?.getString("gender"),
+        parameterBundle?.getString("city"),
+        parameterBundle?.getString("state"),
+        parameterBundle?.getString("zip"),
+        parameterBundle?.getString("country")
     )
 
     result.success(null)
@@ -169,12 +169,12 @@ class FacebookAppEventsPlugin: FlutterPlugin, MethodCallHandler {
     result.success(null)
   }
 
-  private fun createBundleFromMap(parameterMap: Map<String, Any>?): Bundle? {
+  private fun createBundleFromMap(parameterMap: Map<String, Any>?): Bundle {
+    val bundle = Bundle()
     if (parameterMap == null) {
-      return null
+      return bundle
     }
 
-    val bundle = Bundle()
     for (jsonParam in parameterMap.entries) {
       val value = jsonParam.value
       val key = jsonParam.key
