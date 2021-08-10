@@ -116,7 +116,18 @@ public class SwiftFacebookAppEventsPlugin: NSObject, FlutterPlugin {
 
     private func handleSetUserData(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         let arguments = call.arguments as? [String: Any] ?? [String: Any]()
-        AppEvents.setUser(email: arguments["email"] as? String, firstName: arguments["firstName"] as? String, lastName: arguments["lastName"] as? String, phone: arguments["phone"] as? String, dateOfBirth: arguments["dateOfBirth"] as? String, gender: arguments["gender"] as? String, city: arguments["city"] as? String, state: arguments["state"] as? String, zip: arguments["zip"] as? String, country: arguments["country"] as? String)
+        AppEvents.setUser(
+            email: arguments["email"] as? String,
+            firstName: arguments["firstName"] as? String,
+            lastName: arguments["lastName"] as? String,
+            phone: arguments["phone"] as? String,
+            dateOfBirth: arguments["dateOfBirth"] as? String,
+            gender: arguments["gender"] as? String,
+            city: arguments["city"] as? String,
+            state: arguments["state"] as? String,
+            zip: arguments["zip"] as? String,
+            country: arguments["country"] as? String
+        )
 //        AppEvents.setUserData(arguments["email"] as? String, forType: FBSDKAppEventUserDataType.email)
 //        AppEvents.setUserData(arguments["firstName"] as? String, forType: FBSDKAppEventUserDataType.firstName)
 //        AppEvents.setUserData(arguments["lastName"] as? String, forType: FBSDKAppEventUserDataType.lastName)
@@ -140,8 +151,18 @@ public class SwiftFacebookAppEventsPlugin: NSObject, FlutterPlugin {
     private func handleUpdateUserProperties(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         let arguments = call.arguments as? [String: Any] ?? [String: Any]()
         let parameters =  arguments["parameters"] as! [String: Any]
-        AppEvents.setUser(email: parameters["email"] as? String, firstName: parameters["firstName"] as? String, lastName: parameters["lastName"] as? String, phone: parameters["phone"] as? String, dateOfBirth: parameters["dateOfBirth"] as? String, gender: parameters["gender"] as? String, city: parameters["city"] as? String, state: parameters["state"] as? String, zip: parameters["zip"] as? String, country: parameters["country"] as? String)
-        print("1")
+        AppEvents.setUser(
+            email: parameters["email"] as? String,
+            firstName: parameters["firstName"] as? String,
+            lastName: parameters["lastName"] as? String,
+            phone: parameters["phone"] as? String,
+            dateOfBirth: parameters["dateOfBirth"] as? String,
+            gender: parameters["gender"] as? String,
+            city: parameters["city"] as? String,
+            state: parameters["state"] as? String,
+            zip: parameters["zip"] as? String,
+            country: parameters["country"] as? String
+        )
 //        AppEvents.updateUserProperties( parameters, handler: { (connection, response, error) in
 //            if error != nil {
 //                result(nil)
